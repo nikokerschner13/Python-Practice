@@ -1,0 +1,80 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+# load and investigate the data here:
+atp_df = pd.read_csv("tennis_stats.csv")
+print(atp_df.head())
+plt.scatter(atp_df['BreakPointsOpportunities'],atp_df['Winnings'])
+plt.show()
+
+features = atp_df[['FirstServeReturnPointsWon']]
+outcome = atp_df[['Winnings']]
+
+features_train, features_test, outcome_train, outcome_test = train_test_split(features, outcome, train_size = 0.8)
+
+model = LinearRegression()
+model.fit(features_train,outcome_train)
+model.score(features_test,outcome_test)
+prediction = model.predict(features_test)
+plt.scatter(outcome_test, prediction, alpha =.5)
+plt.show()
+
+
+
+features2 = atp_df[['BreakPointsOpportunities']]
+outcome2 = atp_df[['Winnings']]
+
+features2_train, features2_test, outcome2_train, outcome2_test = train_test_split(features2, outcome2, train_size = 0.8)
+
+model2 = LinearRegression()
+model2.fit(features2_train,outcome2_train)
+model2.score(features2_test,outcome2_test)
+prediction2 = model2.predict(features2_test)
+plt.scatter(outcome2_test, prediction2, alpha =.3)
+plt.show()
+
+
+features3= atp_df[['BreakPointsOpportunities','FirstServeReturnPointsWon']]
+outcome3 = atp_df[['Winnings']]
+
+features3_train, features3_test, outcome3_train, outcome3_test = train_test_split(features3, outcome3, train_size = 0.8)
+
+model3 = LinearRegression()
+model3.fit(features3_train,outcome3_train)
+model3.score(features3_test,outcome3_test)
+prediction3 = model3.predict(features3_test)
+plt.scatter(outcome3_test, prediction3, alpha =.6)
+plt.show()
+
+
+features4= atp_df[['FirstServe','FirstServePointsWon','FirstServeReturnPointsWon',
+'SecondServePointsWon','SecondServeReturnPointsWon','Aces',
+'BreakPointsConverted','BreakPointsFaced','BreakPointsOpportunities',
+'BreakPointsSaved','DoubleFaults','ReturnGamesPlayed','ReturnGamesWon',
+'ReturnPointsWon','ServiceGamesPlayed','ServiceGamesWon','TotalPointsWon',
+'TotalServicePointsWon']]
+outcome4 = atp_df[['Winnings']]
+
+features4_train, features4_test, outcome4_train, outcome4_test = train_test_split(features4, outcome4, train_size = 0.8)
+
+model4 = LinearRegression()
+model4.fit(features4_train,outcome4_train)
+model4.score(features4_test,outcome4_test)
+prediction4 = model4.predict(features4_test)
+plt.scatter(outcome4_test, prediction4, alpha =.8)
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
